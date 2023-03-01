@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:to1.1="http://rosreestr.ru/services/egrn/1.1.1/extract/common/types-object" xmlns:sim1="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" xmlns:dict1="http://rosreestr.ru/services/commons/extract/1.0.1/dict" targetNamespace="http://rosreestr.ru/services/egrn/1.1.1/extract/common/types-object" elementFormDefault="qualified">
+	<xsd:import namespace="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" schemaLocation="commonSimpleTypes.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/commons/extract/1.0.1/dict" schemaLocation="tDict_v01.xsd"/>
+	<!--===Общие сведения-->
+	<xsd:complexType name="BaseDataNotice">
+		<xsd:annotation>
+			<xsd:documentation>Сведения об объекте недвижимости</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:element name="land_record" type="to1.1:DataObject">
+				<xsd:annotation>
+					<xsd:documentation>Земельный участок</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="room_record" type="to1.1:DataObject">
+				<xsd:annotation>
+					<xsd:documentation>Помещение</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="car_parking_space_record" type="to1.1:DataObject">
+				<xsd:annotation>
+					<xsd:documentation>Машино-место</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="property_complex_record" type="to1.1:DataObject">
+				<xsd:annotation>
+					<xsd:documentation>Предприятие как имущественный комплекс</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="unified_real_estate_complex_record" type="to1.1:DataObject">
+				<xsd:annotation>
+					<xsd:documentation>Единый недвижимый комплекс</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="object_under_construction_record" type="to1.1:DataObject">
+				<xsd:annotation>
+					<xsd:documentation>Объект незавершенного строительства</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="build_record" type="to1.1:DataObject">
+				<xsd:annotation>
+					<xsd:documentation>Здание</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="construction_record" type="to1.1:DataObject">
+				<xsd:annotation>
+					<xsd:documentation>Сооружение</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="DataObject">
+		<xsd:annotation>
+			<xsd:documentation>Сведения об объекте недвижимости (вид ,кадастровый номер, адрес)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="object" type="to1.1:ObjectType">
+				<xsd:annotation>
+					<xsd:documentation>Общие сведения об объекте недвижимости</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="address_location" type="to1.1:AddressLocationText" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Адрес (местоположение)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ObjectType">
+		<xsd:annotation>
+			<xsd:documentation>Общие сведения об объекте недвижимости (вид, кадастровый номер)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="common_data" type="to1.1:CommonDataType">
+				<xsd:annotation>
+					<xsd:documentation>Общие сведения</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CommonDataType">
+		<xsd:annotation>
+			<xsd:documentation>Сведения об объекте недвижимости (вид, кадастровый номер)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="type" type="dict1:Dict">
+				<xsd:annotation>
+					<xsd:documentation source="http://192.168.14.254:8000/catalogs/124/items">Вид объекта недвижимости</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="cad_number" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Кадастровый номер</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ClaimRecordsOutType">
+		<xsd:annotation>
+			<xsd:documentation>Сведения о правопритязаниях</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="claim_record" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о правопритязании</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="claim_data">
+							<xsd:annotation>
+								<xsd:documentation>Правопритязание</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:annotation>
+									<xsd:documentation>
+
+            </xsd:documentation>
+								</xsd:annotation>
+								<xsd:sequence>
+									<xsd:element name="urd_type" type="xsd:string">
+										<xsd:annotation>
+											<xsd:documentation source="http://esunsi.at-consulting.ru/catalogs/99/items">Вид регистрационно-учетного действия</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CourtDecisionOut">
+		<xsd:annotation>
+			<xsd:documentation>Решение суда</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="court_name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Наименование суда</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="decision_requisites" type="to1.1:DecisionRequisites">
+				<xsd:annotation>
+					<xsd:documentation>Реквизиты вступившего в законную силу решения суда</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DecisionRequisites">
+		<xsd:annotation>
+			<xsd:documentation>Реквизиты вступившего в законную силу решения суда</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="document_date" type="xsd:date">
+				<xsd:annotation>
+					<xsd:documentation>Дата вынесения решения</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="document_number" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation> Номер решения (дела)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="date_entry_into_force" type="xsd:date" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Дата вступления в законную силу решения суда</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="IncapacityInfo">
+		<xsd:annotation>
+			<xsd:documentation>Сведения о признании правообладателя недееспособным, ограниченно дееспособным</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="incapacity_info_type" type="to1.1:IncapacityInfoType">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о признании правообладателя недееспособным, ограниченно дееспособным</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="IncapacityInfoType">
+		<xsd:annotation>
+			<xsd:documentation>Признание правообладателя недееспособным, ограниченно дееспособным</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:element name="limited_capacity" type="to1.1:CourtDecisionOut">
+				<xsd:annotation>
+					<xsd:documentation>Признан ограниченно дееспособным</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="declared_incapable" type="to1.1:CourtDecisionOut">
+				<xsd:annotation>
+					<xsd:documentation>Признан недееспособным</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:choice>
+	</xsd:complexType>
+	<!--===Адрес (местоположение)-->
+	<xsd:complexType name="AddressLocationText">
+		<xsd:annotation>
+			<xsd:documentation>Адрес (местоположение)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="address" type="to1.1:AddressText">
+				<xsd:annotation>
+					<xsd:documentation>Адрес (местоположение)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AddressText">
+		<xsd:annotation>
+			<xsd:documentation>Адрес (местоположение)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="note" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Неформализованное описание местоположения</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="readable_address" type="sim1:MultiLiner" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Адрес в соответствии с ФИАС</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--===============-->
+</xsd:schema>

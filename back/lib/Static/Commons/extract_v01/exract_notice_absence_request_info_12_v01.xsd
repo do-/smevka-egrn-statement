@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:n12INF1="http://rosreestr.ru/services/egrn/1.0.1/extract/exract-notice-absence-request-info12" xmlns:ds1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/details-statement" xmlns:sim1="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" xmlns:to1.1="http://rosreestr.ru/services/egrn/1.1.1/extract/common/types-object" targetNamespace="http://rosreestr.ru/services/egrn/1.0.1/extract/exract-notice-absence-request-info12" elementFormDefault="qualified">
+	<xsd:import namespace="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" schemaLocation="commonSimpleTypes.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/details-statement" schemaLocation="tDetailsStatement_v01.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.1.1/extract/common/types-object" schemaLocation="tCommonTypesObjects_v01.1.xsd"/>
+	<xsd:element name="exract_notice_absence_request_info_12" type="n12INF1:ExractNoticeAbsenceRequestInfo_12">
+		<xsd:annotation>
+			<xsd:documentation>Уведомление об отсутствии в Едином государственном реестре недвижимости запрашиваемых сведений</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ExractNoticeAbsenceRequestInfo_12">
+		<xsd:annotation>
+			<xsd:documentation>Уведомление об отсутствии в Едином государственном реестре недвижимости запрашиваемых сведений</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="details_statement" type="ds1:DetailsStatement">
+				<xsd:annotation>
+					<xsd:documentation>Реквизиты выписки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="details_request" type="ds1:DetailsRequest">
+				<xsd:annotation>
+					<xsd:documentation>Реквизиты поступившего запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="view_request_info" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Вид запрошенной информации (в соответствии с запросом о предоставлении сведений)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="content_request" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Содержание запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="reasons_notification" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Причины направления уведомления</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="litigations" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Заявленные в судебном порядке права требования, аресты (запрещения)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="claim_records" type="to1.1:ClaimRecordsOutType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о правопритязаниях</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="recipient_statement" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Получатель выписки (Адресат)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="guid" type="sim1:sGUID">
+			<xsd:annotation>
+				<xsd:documentation>Глобальный уникальный идентификатор документа</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+</xsd:schema>

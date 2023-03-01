@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:INFP1="http://rosreestr.ru/services/egrn/1.0.1/extract/extract-info-persons-who-received-info-about-property" xmlns:ds1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/details-statement" xmlns:to1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/types-object" xmlns:sim1="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" targetNamespace="http://rosreestr.ru/services/egrn/1.0.1/extract/extract-info-persons-who-received-info-about-property" elementFormDefault="qualified">
+	<xsd:import namespace="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" schemaLocation="commonSimpleTypes.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/details-statement" schemaLocation="tDetailsStatement_v01.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/types-object" schemaLocation="tCommonTypesObjects_v01.xsd"/>
+	<xsd:element name="extract_info_persons_who_received_info_about_property" type="INFP1:ExtractInfoPersonsWhoReceivedInfoAboutProperty">
+		<xsd:annotation>
+			<xsd:documentation source="http://esunsi.at-consulting.ru/catalogs/159/items">Справка о лицах, получивших сведения об объекте недвижимости</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ExtractInfoPersonsWhoReceivedInfoAboutProperty">
+		<xsd:annotation>
+			<xsd:documentation>Справка о лицах, получивших сведения об объекте недвижимости </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="details_statement" type="ds1:DetailsStatement">
+				<xsd:annotation>
+					<xsd:documentation>Реквизиты справки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="details_request" type="ds1:DetailsRequestPeriod">
+				<xsd:annotation>
+					<xsd:documentation>Реквизиты поступившего запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="base_data" type="to1:BaseData">
+				<xsd:annotation>
+					<xsd:documentation>Сведения об объекте недвижимости</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="info_issued">
+				<xsd:annotation>
+					<xsd:documentation>Сведения выданы</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="note_issued" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>Сведения выданы</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="person_receiving_info_about_property" type="xsd:string">
+										<xsd:annotation>
+											<xsd:documentation>Лицо, получившее информацию об объекте недвижимости</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="date_issue" type="xsd:date">
+										<xsd:annotation>
+											<xsd:documentation>Дата выдачи</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="reference_numb_extract" type="xsd:string" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Исходящий номер выписки</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="recipient_reference" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Получатель справки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="guid" type="sim1:sGUID">
+			<xsd:annotation>
+				<xsd:documentation>Глобальный уникальный идентификатор документа</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+</xsd:schema>

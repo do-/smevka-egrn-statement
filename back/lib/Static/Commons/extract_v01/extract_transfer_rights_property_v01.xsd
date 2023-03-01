@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:TRNSF1="http://rosreestr.ru/services/egrn/1.0.1/extract/extract-transfer-rights-property" xmlns:ds1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/details-statement" xmlns:sim1="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" xmlns:to1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/types-object" targetNamespace="http://rosreestr.ru/services/egrn/1.0.1/extract/extract-transfer-rights-property" elementFormDefault="qualified">
+	<xsd:import namespace="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" schemaLocation="commonSimpleTypes.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/details-statement" schemaLocation="tDetailsStatement_v01.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/types-object" schemaLocation="tCommonTypesObjects_v01.xsd"/>
+	<xsd:element name="extract_transfer_rights_property" type="TRNSF1:ExtractTransferRightsProperty">
+		<xsd:annotation>
+			<xsd:documentation source="http://esunsi.at-consulting.ru/catalogs/159/items">Выписка из Единого государственного реестра недвижимости о переходе прав на объект недвижимости</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ExtractTransferRightsProperty">
+		<xsd:annotation>
+			<xsd:documentation>Выписка из Единого государственного реестра недвижимости о переходе прав на объект недвижимости</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="details_statement" type="ds1:DetailsStatement">
+				<xsd:annotation>
+					<xsd:documentation>Реквизиты выписки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="details_request" type="ds1:DetailsRequest">
+				<xsd:annotation>
+					<xsd:documentation>Реквизиты поступившего запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="base_data" type="to1:BaseData">
+				<xsd:annotation>
+					<xsd:documentation>Сведения об объекте недвижимости</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="right_records" type="to1:RightRecordsTransfer">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о правах и правообладателях</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="recipient_statement" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Получатель выписки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="guid" type="sim1:sGUID">
+			<xsd:annotation>
+				<xsd:documentation>Глобальный уникальный идентификатор документа</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+</xsd:schema>

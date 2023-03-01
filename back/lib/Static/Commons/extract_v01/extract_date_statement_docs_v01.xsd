@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:DATED1="http://rosreestr.ru/services/egrn/1.0.1/extract/extract-date-statement-docs" xmlns:ds1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/details-statement" xmlns:to1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/types-object" xmlns:sim1="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" targetNamespace="http://rosreestr.ru/services/egrn/1.0.1/extract/extract-date-statement-docs" elementFormDefault="qualified">
+	<xsd:import namespace="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" schemaLocation="commonSimpleTypes.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/details-statement" schemaLocation="tDetailsStatement_v01.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/types-object" schemaLocation="tCommonTypesObjects_v01.xsd"/>
+	<xsd:element name="extract_date_statement_docs" type="DATED1:ExtractDateStatementDocs">
+		<xsd:annotation>
+			<xsd:documentation source="http://esunsi.at-consulting.ru/catalogs/159/items">Выписка о дате получения органом регистрации прав заявления о государственном кадастровом учете и (или) государственной регистрации прав и прилагаемых к нему документов</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ExtractDateStatementDocs">
+		<xsd:annotation>
+			<xsd:documentation>Выписка о дате получения органом регистрации прав заявления о государственном кадастровом учете и (или) государственной регистрации прав и прилагаемых к нему документов</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="details_statement" type="ds1:DetailsStatement">
+				<xsd:annotation>
+					<xsd:documentation>Реквизиты выписки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="details_request" type="ds1:DetailsRequest">
+				<xsd:annotation>
+					<xsd:documentation>Реквизиты поступившего запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="base_data" type="to1:BaseData">
+				<xsd:annotation>
+					<xsd:documentation>Сведения об объекте недвижимости</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="received_requests">
+				<xsd:annotation>
+					<xsd:documentation>Реквизиты заявлений, находящихся на рассмотрении</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="received_request" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>Реквизиты заявления, находящегося на рассмотрении</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="date_receipt_reg_statement" type="xsd:date">
+										<xsd:annotation>
+											<xsd:documentation>Дата получения органом регистрации прав заявления</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="urd_type" type="xsd:string">
+										<xsd:annotation>
+											<xsd:documentation source="http://esunsi.at-consulting.ru/catalogs/99/items">Вид УРД</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="recipient_statement" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Получатель выписки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="guid" type="sim1:sGUID">
+			<xsd:annotation>
+				<xsd:documentation>Глобальный уникальный идентификатор документа</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+</xsd:schema>

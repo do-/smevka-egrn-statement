@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:das="http://rosreestr.ru/services/v0.1/commons/directories/regionrf"
+           xmlns:req="urn://x-artefacts-rosreestr-gov-ru/virtual-services/egrn-statement/1.1.2"
+           xmlns:dAcC="http://rosreestr.ru/services/v0.1/commons/directories/actionCode"
+           targetNamespace="urn://x-artefacts-rosreestr-gov-ru/virtual-services/egrn-statement/1.1.2"
+           elementFormDefault="qualified">
+    <xs:import
+            namespace="http://rosreestr.ru/services/v0.1/commons/directories/regionrf"
+            schemaLocation="Commons/Dictionary/DRegionsRF.xsd"/>
+    <xs:import
+            namespace="http://rosreestr.ru/services/v0.1/commons/directories/actionCode"
+            schemaLocation="Commons/Dictionary/DActionCode.xsd"/>
+
+    <!--Для валидации запроса/ответа на уровне СМЭВ3-->
+    <xs:element name="Request" type="req:requestType">
+        <xs:annotation>
+            <xs:documentation>Запрос на предоставление услуг Росреестра в электронном виде</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Response" type="req:responseType">
+        <xs:annotation>
+            <xs:documentation>Ответ из Росреестра с номером заявки</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:complexType name="requestType">
+        <xs:annotation>
+            <xs:documentation>Тип запроса на предоставление услуг Росреестра в электронном виде</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="region" type="das:dRegionsRF" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Код региона
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="externalNumber" type="xs:string" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Номер обращения в информационной системе отправителя
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="senderType" type="req:senderTypes" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Тип информационной системы Потребителя
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="actionCode" type="dAcC:DActionCode" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Код учетно-регистрационного действия (дополнительный, для тестирования в режиме
+                        эмуляции)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Attachment" type="req:AttachmentRequestType" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>Блок описания вложения</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="responseType">
+        <xs:annotation>
+            <xs:documentation>Тип ответа на предоставление услуг Росреестра в электронном виде</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="requestNumber" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Номер обращения в ФГИС ЕГРН</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Attachment" type="req:AttachmentResponseType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Блок описания вложения</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="senderTypes">
+        <xs:annotation>
+            <xs:documentation>Тип ИС отправителя</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="MFC">
+                <xs:annotation>
+                    <xs:documentation>МФЦ</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Vedomstvo">
+                <xs:annotation>
+                    <xs:documentation>ИС ФОИВ, РОИВ, ОМСУ</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Other">
+                <xs:annotation>
+                    <xs:documentation>Другое</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="AttachmentRequestType">
+        <xs:sequence>
+            <!-- Указание способа передачи вложения: через ФХ или методом MTOM-передачи -->
+            <xs:choice>
+                <!-- Признак передачи вложения через ФХ-->
+                <xs:element name="AttachmentFSLink" type="xs:boolean"/>
+                <!-- Признак передачи вложения методом MTOM -->
+                <xs:element name="IsMTOMAttachmentContent" type="xs:boolean"/>
+            </xs:choice>
+
+            <!-- Состав вложения -->
+            <!-- Опись пакета и тип учетно-регистрационного действия -->
+            <xs:element name="RequestDescription" type="req:TValidatedStructuredAttachmentFormat"/>
+            <!-- Заявление или заявления -->
+            <xs:element name="Statement" type="req:TValidatedStructuredAttachmentFormat" maxOccurs="unbounded"/>
+            <!-- Дополнительные файлы (в т.ч. открепленная ЭЦП) -->
+            <xs:element name="File" type="req:TStructuredAttachmentFormat" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AttachmentResponseType">
+        <xs:sequence>
+            <!-- Указание способа передачи вложения: через ФХ или методом MTOM-передачи -->
+            <xs:choice>
+                <!-- Признак передачи вложения через ФХ-->
+                <xs:element name="AttachmentFSLink" type="xs:boolean"/>
+                <!-- Признак передачи вложения методом MTOM -->
+                <xs:element name="IsMTOMAttachmentContent" type="xs:boolean"/>
+            </xs:choice>
+
+            <!-- Описание состава вложения -->
+            <xs:element name="ResultFile" type="req:TValidatedStructuredAttachmentFormat" minOccurs="0"
+                        maxOccurs="unbounded"/>
+            <xs:element name="File" type="req:TStructuredAttachmentFormat" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TValidatedStructuredAttachmentFormat">
+        <xs:annotation>
+            <xs:documentation>Тип файла заявления или результата (выписки)</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="IsUnstructuredFormat" type="xs:boolean" fixed="false">
+                <xs:annotation>
+                    <xs:documentation>Структурированный элемент или нет: валидировать ли на уровне ЕСМЭВ
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="IsZippedPacket" type="xs:boolean" fixed="true">
+                <xs:annotation>
+                    <xs:documentation>Передается в составе zip-архива</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="fileName" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Путь до файла относительно корня архива</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TStructuredAttachmentFormat">
+        <xs:annotation>
+            <xs:documentation>Тип файла, приложенного к заявлению</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="IsUnstructuredFormat" type="xs:boolean" fixed="true">
+                <xs:annotation>
+                    <xs:documentation>Структурированный элемент или нет: валидировать ли на уровне ЕСМЭВ
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="IsZippedPacket" type="xs:boolean" fixed="true">
+                <xs:annotation>
+                    <xs:documentation>Передается в составе zip-архива</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="fileName" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Путь до файла относительно корня архива</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

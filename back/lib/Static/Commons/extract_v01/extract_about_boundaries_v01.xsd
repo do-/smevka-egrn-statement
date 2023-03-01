@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:BND1="http://rosreestr.ru/services/egrn/1.0.1/extract/extract-about-boundaries" xmlns:res1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/resolution-requisites" xmlns:ds1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/details-statement" xmlns:to1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/types-object" xmlns:dict1="http://rosreestr.ru/services/commons/extract/1.0.1/dict" xmlns:sim1="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" targetNamespace="http://rosreestr.ru/services/egrn/1.0.1/extract/extract-about-boundaries" elementFormDefault="qualified">
+	<xsd:import namespace="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" schemaLocation="commonSimpleTypes.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/commons/extract/1.0.1/dict" schemaLocation="tDict_v01.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/details-statement" schemaLocation="tDetailsStatement_v01.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/types-object" schemaLocation="tCommonTypesObjects_v01.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/resolution-requisites" schemaLocation="tResolutionRequisites_v01.xsd"/>
+	<xsd:element name="extract_about_boundary" type="BND1:ExtractAboutBoundary">
+		<xsd:annotation>
+			<xsd:documentation source="http://esunsi.at-consulting.ru/catalogs/159/items">Выписка о границе между субъектами Российской Федерации, границе муниципального образования, границе населенного пункта</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ExtractAboutBoundary">
+		<xsd:annotation>
+			<xsd:documentation>Выписка о границе между субъектами Российской Федерации, границе муниципального образования, границе населенного пункта</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="details_statement" type="ds1:DetailsStatement">
+				<xsd:annotation>
+					<xsd:documentation>Реквизиты выписки о границе между субъектами Российской Федерации, границе муниципального образования, границе населенного пункта</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="details_request" type="ds1:DetailsRequest">
+				<xsd:annotation>
+					<xsd:documentation>Реквизиты поступившего запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="boundary_record" type="BND1:BoundaryRecord">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о границе между субъектами Российской Федерации, границе муниципального образования, границе населенного пункта</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="guid" type="sim1:sGUID">
+			<xsd:annotation>
+				<xsd:documentation>Глобальный уникальный идентификатор документа</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="BoundaryRecord">
+		<xsd:annotation>
+			<xsd:documentation>Сведения о границе между субъектами Российской Федерации, границе муниципального образования, границе населенного пункта</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:element name="subject_boundary" type="BND1:SubjectBoundary">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о границе между субъектами Российской Федерации</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="municipal_boundary" type="BND1:MunicipalInhabitedLocalityBoundary">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о границе муниципального образования</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="inhabited_locality_boundary" type="BND1:MunicipalInhabitedLocalityBoundary">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о границе населённого пункта</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="SubjectBoundary">
+		<xsd:annotation>
+			<xsd:documentation>Сведения о границе между субъектами Российской Федерации</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="reg_numb_border">
+				<xsd:annotation>
+					<xsd:documentation>Реестровый номер границы</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="50"/>
+						<xsd:minLength value="1"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="type_boundary" type="dict1:Dict">
+				<xsd:annotation>
+					<xsd:documentation source="http://esunsi.at-consulting.ru/catalogs/120/items">Вид объекта реестра границ</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="record_info" type="to1:RecordInfoAllDates">
+				<xsd:annotation>
+					<xsd:documentation>Дата внесения (даты изменения, дата исключения) сведений</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="special_notes" type="BND1:SpecialNotes">
+				<xsd:annotation>
+					<xsd:documentation>Особые отметки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="decisions_requisites" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Реквизиты правовых актов об утверждении, изменении границы</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="decision_requisites" type="res1:ResolutionRequisites" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>Реквизиты документа</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="map_plan_information" type="to1:InformationFund" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о карте (плане) объекта землеустройства</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="contours_location" type="to1:BoundContoursLocationOut">
+				<xsd:annotation>
+					<xsd:documentation>Описание местоположения границ</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MunicipalInhabitedLocalityBoundary">
+		<xsd:annotation>
+			<xsd:documentation>Сведения о границе муниципального образования, населённого пункта</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="reg_numb_border">
+				<xsd:annotation>
+					<xsd:documentation>Реестровый номер границы</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="50"/>
+						<xsd:minLength value="1"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="type_boundary" type="dict1:Dict">
+				<xsd:annotation>
+					<xsd:documentation source="http://esunsi.at-consulting.ru/catalogs/120/items">Вид объекта реестра границ</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="record_info" type="to1:RecordInfoAllDates">
+				<xsd:annotation>
+					<xsd:documentation>Дата внесения (даты изменения, дата исключения) сведений</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="decisions_requisites" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Реквизиты правовых актов об утверждении, изменении границы</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="decision_requisites" type="res1:ResolutionRequisites" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>Реквизиты документа</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="map_plan_information" type="to1:InformationFund" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о карте (плане) объекта землеустройства</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="contours_location" type="to1:BoundContoursLocationOut">
+				<xsd:annotation>
+					<xsd:documentation>Описание местоположения границ</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SpecialNotes">
+		<xsd:annotation>
+			<xsd:documentation>Особые отметки</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="neighbour_regions" type="to1:NeighbourRegions">
+				<xsd:annotation>
+					<xsd:documentation>Смежные субъекты Российской Федерации</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

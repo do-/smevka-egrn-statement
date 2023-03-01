@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:TITL1="http://rosreestr.ru/services/egrn/1.0.1/extract/extract-about-contents-documents-title" xmlns:ds1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/details-statement" xmlns:to1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/types-object" xmlns:sim1="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" xmlns:dr1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/document-requisites" targetNamespace="http://rosreestr.ru/services/egrn/1.0.1/extract/extract-about-contents-documents-title" elementFormDefault="qualified">
+	<xsd:import namespace="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" schemaLocation="commonSimpleTypes.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/details-statement" schemaLocation="tDetailsStatement_v01.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/types-object" schemaLocation="tCommonTypesObjects_v01.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/document-requisites" schemaLocation="tDocument_requisites_v01.xsd"/>
+	<!--===Выписка из ЕГРН о содержании правоустанавливающих документов-->
+	<xsd:element name="extract_about_contents_documents_title" type="TITL1:ExtractAboutContentsDocumentsTitle">
+		<xsd:annotation>
+			<xsd:documentation>Выписка из Единого государственного реестра недвижимости о содержании правоустанавливающих документов</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ExtractAboutContentsDocumentsTitle">
+		<xsd:annotation>
+			<xsd:documentation>Выписка из Единого государственного реестра недвижимости о содержании правоустанавливающих документов</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="details_statement" type="ds1:DetailsStatement">
+				<xsd:annotation>
+					<xsd:documentation>Реквизиты выписки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="details_request" type="ds1:DetailsRequest">
+				<xsd:annotation>
+					<xsd:documentation>Реквизиты поступившего запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="base_data" type="to1:BaseData">
+				<xsd:annotation>
+					<xsd:documentation>Сведения об объекте недвижимости</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="record_info" type="to1:CancelDate" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Дата закрытия раздела ЕГРН на объект недвижимости</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="legal_documents">
+				<xsd:annotation>
+					<xsd:documentation>Правоустанавливающие документы</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="legal_document" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>Правоустанавливающий документ</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="underlying_document" type="dr1:DocumentRequisites">
+										<xsd:annotation>
+											<xsd:documentation>Реквизиты правоустанавливающего документа</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="content_legal_document" type="xsd:string">
+										<xsd:annotation>
+											<xsd:documentation>Содержание правоустанавливающего документа</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="recipient_statement" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Получатель выписки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="guid" type="sim1:sGUID">
+			<xsd:annotation>
+				<xsd:documentation>Глобальный уникальный идентификатор документа</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+</xsd:schema>

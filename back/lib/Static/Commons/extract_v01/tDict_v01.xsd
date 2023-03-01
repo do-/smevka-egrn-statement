@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dict1="http://rosreestr.ru/services/commons/extract/1.0.1/dict" targetNamespace="http://rosreestr.ru/services/commons/extract/1.0.1/dict" elementFormDefault="qualified">
+	<xsd:complexType name="Dict">
+		<xsd:annotation>
+			<xsd:documentation>Справочник НСИ</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="code" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Код справочника НСИ</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="value" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Текстовое значение, соответствующее коду справочника НСИ</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

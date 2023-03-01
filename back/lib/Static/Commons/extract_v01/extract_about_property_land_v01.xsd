@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:aLND1="http://rosreestr.ru/services/egrn/1.0.1/extract/extract-about-property-land" xmlns:adr1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/address-fias" xmlns:ds1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/details-statement" xmlns:to1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/types-object" xmlns:sim1="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" targetNamespace="http://rosreestr.ru/services/egrn/1.0.1/extract/extract-about-property-land" elementFormDefault="qualified">
+	<xsd:import namespace="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" schemaLocation="commonSimpleTypes.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/details-statement" schemaLocation="tDetailsStatement_v01.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/types-object" schemaLocation="tCommonTypesObjects_v01.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/address-fias" schemaLocation="tAddress_All_v01.xsd"/>
+	<xsd:element name="extract_about_property_land" type="aLND1:ExtractAboutPropertyLand">
+		<xsd:annotation>
+			<xsd:documentation source="http://esunsi.at-consulting.ru/catalogs/159/items">Выписка из Единого государственного реестра недвижимости об объекте недвижимости (земельный участок)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ExtractAboutPropertyLand">
+		<xsd:annotation>
+			<xsd:documentation>Выписка из Единого государственного реестра недвижимости об объекте недвижимости (земельный участок)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="details_statement" type="ds1:DetailsStatementRealty">
+				<xsd:annotation>
+					<xsd:documentation>Реквизиты выписки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="details_request" type="ds1:DetailsRequest" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Реквизиты поступившего запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="land_record" type="aLND1:LandRecordAboutProperty">
+				<xsd:annotation>
+					<xsd:documentation>Сведения об объекте недвижимости - земельном участке</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="right_records" type="to1:RightRecordsAboutProperty" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о правах и правообладателях</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="restrict_records" type="to1:RestrictRecordsBaseParamsLand" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Ограничения прав и обременения объекта недвижимости</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ownerless_right_record" type="to1:OwnerlessRightRecordOut" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о праве (бесхозяйное имущество)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="claim_records" type="to1:ClaimRecordsOut" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о правопритязаниях</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="deal_records" type="to1:DealRecordsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о сделках</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="non_registrabilitys" type="to1:NonRegistrabilitys" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о невозможности государственной регистрации перехода, прекращения, ограничения права на земельный участок из земель сельскохозяйственного назначения или обременения такого земельного участка до завершения рассмотрения судом дела о его изъятии в связи с неиспользованием по целевому назначению или использованием с нарушением законодательства Российской Федерации</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="recipient_statement" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Получатель выписки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="status" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Статус записи об объекте недвижимости</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="guid" type="sim1:sGUID">
+			<xsd:annotation>
+				<xsd:documentation>Глобальный уникальный идентификатор документа</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="LandRecordAboutProperty">
+		<xsd:annotation>
+			<xsd:documentation>Сведения об объекте недвижимости - земельном участке</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="record_info" type="to1:RecordInfo">
+				<xsd:annotation>
+					<xsd:documentation>Даты государственной регистрации</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="object" type="to1:ObjectLand">
+				<xsd:annotation>
+					<xsd:documentation>Общие сведения об объекте недвижимости </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="apartment_building" type="to1:ApartmentBuildingUse" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о создании (эксплуатации) на земельном участке наемного дома</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="cad_links" type="to1:CadLinksLandAll" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сведения об объектах (связь с кадастровыми номерами)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="params" type="to1:ParamsLandCategoryUses">
+				<xsd:annotation>
+					<xsd:documentation>Характеристики земельного участка</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="address_location" type="adr1:AddressLocationLand" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Адрес (местоположение)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="cad_works" type="to1:CadWorks" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о кадастровом инженере (кадастровых инженерах)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="zones_and_boundaries" type="to1:ZonesAndBoundaries" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о расположении земельного участка в границах зон, территорий</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="survey_boundaries" type="to1:SurveyBoundaries" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Условный номер земельного участка и сведения о расположении земельного участка в границах территории, в отношении которой утвержден проект межевания территории</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="natural_objects" type="to1:NaturalObjects" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о природных объектах, расположенных в пределах земельного участка</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="government_land_supervision" type="to1:GovernmentLandSupervision" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о результатах проведения государственного земельного надзора</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="cost" type="to1:Cost" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Кадастровая стоимость</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="object_parts" type="to1:LandPartsProperty" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о частях земельного участка</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="restrictions_encumbrances" type="to1:RestrictionsEncumbrances" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Незарегистрированные и не подлежащие государственной регистрации ограничения (обременения)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="contours_location" type="to1:ContoursLocationBorders" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Описание местоположения границ земельного участка</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="special_notes" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Особые отметки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

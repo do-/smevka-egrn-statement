@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:res1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/resolution-requisites" xmlns:dict1="http://rosreestr.ru/services/commons/extract/1.0.1/dict" xmlns:sim1="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" targetNamespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/resolution-requisites" elementFormDefault="qualified">
+	<xsd:import namespace="http://rosreestr.ru/services/commons/extract/1.0.1/dict" schemaLocation="tDict_v01.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" schemaLocation="commonSimpleTypes.xsd"/>
+	<xsd:complexType name="ResolutionRequisites">
+		<xsd:annotation>
+			<xsd:documentation>Реквизиты документа: решения, соглашения, иного правового акта</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="document_code" type="dict1:Dict">
+				<xsd:annotation>
+					<xsd:documentation source="http://esunsi.at-consulting.ru:8000/catalogs/98/items">Вид документа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="document_name" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Наименование документа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="document_series" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Серия документа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="document_number" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> Номер документа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="document_date" type="xsd:date" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Дата документа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="document_issuer" type="sim1:MultiLiner" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Орган власти, организация, выдавшие документ. Автор документа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="source_official_publication" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Источник официального опубликования</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

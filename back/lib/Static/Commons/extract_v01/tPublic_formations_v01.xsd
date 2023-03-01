@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pf1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/public-formations" xmlns:sim1="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" xmlns:dict1="http://rosreestr.ru/services/commons/extract/1.0.1/dict" targetNamespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/public-formations" elementFormDefault="qualified">
+	<xsd:import namespace="http://rosreestr.ru/services/commons/extract/1.0.1/dict" schemaLocation="tDict_v01.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" schemaLocation="commonSimpleTypes.xsd"/>
+	<xsd:complexType name="PublicFormations">
+		<xsd:annotation>
+			<xsd:documentation>Публично-правовое образование</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="public_formation_type" type="pf1:PublicFormationType">
+				<xsd:annotation>
+					<xsd:documentation>Тип публично-правового образования</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PublicFormationType">
+		<xsd:annotation>
+			<xsd:documentation>Тип публично-правового образования</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:element name="foreign_public" type="pf1:ForeignPublic">
+				<xsd:annotation>
+					<xsd:documentation>Иностранное государство</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="union_state" type="pf1:UnionState">
+				<xsd:annotation>
+					<xsd:documentation>Союзное государство</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="russia" type="pf1:Russia">
+				<xsd:annotation>
+					<xsd:documentation>Российская Федерация</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="subject_of_rf" type="pf1:SubjectOfRF">
+				<xsd:annotation>
+					<xsd:documentation>Субъект Российской Федерации</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="municipality" type="pf1:Municipality">
+				<xsd:annotation>
+					<xsd:documentation>Муниципальное образование</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="ForeignPublic">
+		<xsd:annotation>
+			<xsd:documentation>Полное наименование иностранного государства</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="name" type="dict1:Dict">
+				<xsd:annotation>
+					<xsd:documentation source="http://esunsi.at-consulting.ru:8000/catalogs/62/items">Полное наименование иностранного государства</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UnionState">
+		<xsd:annotation>
+			<xsd:documentation>Союзное государство</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Союзное государство</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Russia">
+		<xsd:annotation>
+			<xsd:documentation>Российская Федерация</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="name" type="dict1:Dict">
+				<xsd:annotation>
+					<xsd:documentation source="http://esunsi.at-consulting.ru:8000/catalogs/62/items">Российская Федерация</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SubjectOfRF">
+		<xsd:annotation>
+			<xsd:documentation>Субъект Российской Федерации</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="name" type="dict1:Dict">
+				<xsd:annotation>
+					<xsd:documentation source="http://esunsi.at-consulting.ru:8000/catalogs/4/items">Наименование субъекта Российской Федерации</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Municipality">
+		<xsd:annotation>
+			<xsd:documentation>Муниципальное образование</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="name" type="sim1:MultiLiner">
+				<xsd:annotation>
+					<xsd:documentation>Наименование муниципального образования</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

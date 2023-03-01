@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bBLD1="http://rosreestr.ru/services/egrn/1.0.1/extract/extract-base-params-build" xmlns:adr1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/address-fias" xmlns:ds1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/details-statement" xmlns:to1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/types-object" xmlns:sim1="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" targetNamespace="http://rosreestr.ru/services/egrn/1.0.1/extract/extract-base-params-build" elementFormDefault="qualified">
+	<xsd:import namespace="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" schemaLocation="commonSimpleTypes.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/details-statement" schemaLocation="tDetailsStatement_v01.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/types-object" schemaLocation="tCommonTypesObjects_v01.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/address-fias" schemaLocation="tAddress_All_v01.xsd"/>
+	<xsd:element name="extract_base_params_build" type="bBLD1:ExtractBaseParamsBuild">
+		<xsd:annotation>
+			<xsd:documentation source="http://esunsi.at-consulting.ru/catalogs/159/items">Выписка об основных характеристиках и зарегистрированных правах на объект недвижимости (здание)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ExtractBaseParamsBuild">
+		<xsd:annotation>
+			<xsd:documentation>Выписка об основных характеристиках и зарегистрированных правах на объект недвижимости (здание)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="details_statement" type="ds1:DetailsStatementRealty">
+				<xsd:annotation>
+					<xsd:documentation>Реквизиты выписки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="details_request" type="ds1:DetailsRequest" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Реквизиты поступившего запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="build_record" type="bBLD1:BuildRecordBaseParams">
+				<xsd:annotation>
+					<xsd:documentation>Сведения об объекте недвижимости - здании</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="room_records" type="to1:RoomLocationInBuild" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Местоположение помещений в объекте недвижимости (план(ы) расположения помещения)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="car_parking_space_records" type="to1:CarParkingSpaceLocationInBuild" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Местоположение машино-мест в объекте недвижимости (план(ы) расположения машино-места)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="right_records" type="to1:RightRecordsBaseParams" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о правах и правообладателях</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="restrict_records" type="to1:RestrictRecordsBaseParams" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Ограничения прав и обременения объекта недвижимости</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ownerless_right_record" type="to1:OwnerlessRightRecordOut" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о праве (бесхозяйное имущество)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="deal_records" type="to1:DealRecordsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о сделках, совершенных без необходимого в силу закона согласия третьего лица, органа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="recipient_statement" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Получатель выписки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="status" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Статус записи об объекте недвижимости</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="guid" type="sim1:sGUID">
+			<xsd:annotation>
+				<xsd:documentation>Глобальный уникальный идентификатор документа</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="BuildRecordBaseParams">
+		<xsd:annotation>
+			<xsd:documentation>Сведения об объекте недвижимости - здании</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="record_info" type="to1:RecordInfo">
+				<xsd:annotation>
+					<xsd:documentation>Даты государственной регистрации</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="object" type="to1:ObjectCommonData">
+				<xsd:annotation>
+					<xsd:documentation>Общие сведения об объекте недвижимости</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="cad_links" type="to1:CadLinks" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сведения об объектах (связь с кадастровыми номерами)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="params" type="to1:ParamsBuildWithoutMaterials">
+				<xsd:annotation>
+					<xsd:documentation>Характеристики здания</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="address_location" type="adr1:AddressLocationBuild" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Адрес (местоположение)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="cost" type="to1:Cost" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Кадастровая стоимость</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="object_parts" type="to1:ObjectPartsNumberRestrictions" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о частях здания</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="contours" type="to1:ContoursOKSOut" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Описание местоположения контура здания</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="special_notes" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Особые отметки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

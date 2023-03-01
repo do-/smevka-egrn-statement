@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:otsub1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/other-subject" xmlns:con1="http://rosreestr.ru/services/egrn/1.0.1/extract/common/contacts" xmlns:sim1="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" targetNamespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/other-subject" elementFormDefault="qualified">
+	<xsd:import namespace="http://rosreestr.ru/services/egrn/1.0.1/extract/common/contacts" schemaLocation="tContacts_v01.xsd"/>
+	<xsd:import namespace="http://rosreestr.ru/services/commons/extract/1.0.1/simple-types" schemaLocation="commonSimpleTypes.xsd"/>
+	<xsd:complexType name="OtherSubject">
+		<xsd:annotation>
+			<xsd:documentation>Иной субъект</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Наименование</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="short_name" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Краткое наименование</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="comment" type="sim1:MultiLiner" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Комментарий</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="print_text" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Наименование для печати</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="registration_organ" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Регистрирующий орган</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="contacts" type="con1:Contacts" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Контакты</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
